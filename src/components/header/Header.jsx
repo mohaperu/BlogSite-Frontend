@@ -28,9 +28,13 @@ const Header = () => {
 
     if (authState && authState.isPending) return null;
 
-    const login = async () => history.push('/login');
+    const login = async () => {
+        history.push('/login');
+    } 
     
-    const logout = async () => oktaAuth.signOut();
+    const logout = async () => {
+        await oktaAuth.signOut();
+    }
 
     const button = authState.isAuthenticated ? 
         <Button onClick={logout} style={{
@@ -50,7 +54,7 @@ const Header = () => {
                 <Link to='/'>HOME</Link>
                 <Link to='/about'>ABOUT</Link>
                 <Link to='/contact'>CONTACT</Link>
-                <Link>{button}</Link>
+                <Link >{button}</Link>
             </Toolbar>
         </AppBar>
     )

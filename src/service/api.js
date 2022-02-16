@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const url = 'https://blogsitebackend0.herokuapp.com';
+// const url = 'http://localhost:8000';
 
 export const uploadFile = async (post) => {
     console.log(post);

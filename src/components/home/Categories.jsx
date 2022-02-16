@@ -21,6 +21,7 @@ const useStyle = makeStyles({
     }
 })
 
+
 const Categories = ({ match }) => {
     const classes = useStyle();
     const location = useLocation();
@@ -28,7 +29,7 @@ const Categories = ({ match }) => {
     return (
         <>
             <Link to={`/create/${location.search}`} style={{ textDecoration: 'none' }}>
-                <Button variant="contained" className={classes.write}>Create Blog</Button>
+                <Button variant="contained" className={classes.write} >Create Blog</Button>
             </Link>
             
             <Table className={classes.table}>

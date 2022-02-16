@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Box, makeStyles, TextareaAutosize, Button, FormControl, InputBase } from '@material-ui/core';
-import { AddCircle as Add, CallEnd } from '@material-ui/icons';
+import { AddCircle as Add, CallEnd, PostAddOutlined } from '@material-ui/icons';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { createPost, uploadFile } from '../../service/api';
@@ -59,14 +59,14 @@ const CreatePost = () => {
     const { account, setAccount } = useContext(LoginContext);
 
     const url = post.picture ? post.picture : 'https://images.unsplash.com/photo-1543128639-4cb7e6eeef1b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wJTIwc2V0dXB8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80';
-    
+
     useEffect(() => {
-        const getImage = async () => { 
-            if(file) {
+        const getImage = async () => {
+            if (file) {
                 const data = new FormData();
                 data.append("name", file.name);
                 data.append("file", file);
-                
+
                 const image = await uploadFile(data);
                 post.picture = image.data;
                 setImageURL(image.data);
@@ -80,6 +80,7 @@ const CreatePost = () => {
     const savePost = async () => {
         await createPost(post);
         history.push('/');
+        window.location.reload();
     }
 
     const handleChange = (e) => {
@@ -89,7 +90,6 @@ const CreatePost = () => {
     return (
         <Box className={classes.container}>
             <img src={url} alt="post" className={classes.image} />
-
             <FormControl className={classes.title}>
                 <label htmlFor="fileInput">
                     <Add className={classes.addIcon} fontSize="large" color="action" />
@@ -101,7 +101,7 @@ const CreatePost = () => {
                     onChange={(e) => setFile(e.target.files[0])}
                 />
                 <InputBase onChange={(e) => handleChange(e)} name='title' placeholder="Title" className={classes.textfield} />
-                <Button onClick={() => savePost()} variant="contained" color="primary">Publish</Button>
+                    <Button onClick={() => savePost()} variant="contained" color="primary">Publish</Button>
             </FormControl>
 
             <TextareaAutosize
@@ -109,7 +109,7 @@ const CreatePost = () => {
                 placeholder="Tell your story..."
                 className={classes.textarea}
                 name='description'
-                onChange={(e) => handleChange(e)} 
+                onChange={(e) => handleChange(e)}
             />
         </Box>
     )

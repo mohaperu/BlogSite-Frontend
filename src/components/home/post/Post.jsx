@@ -44,6 +44,7 @@ const Post = ({ post }) => {
     } 
 
     return (
+        
         <Box className={classes.container}>
             <img src={url} alt="post" className={classes.image} />
             <Typography className={classes.textColor}>{post.categories}</Typography>
